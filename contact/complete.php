@@ -3,6 +3,24 @@
 session_start(); 
 //エスケープ処理やデータをチェックする関数を記述したファイルの読み込み
 require '../libs/functions.php'; 
+
+//POSTされたデータをチェック, URLの直たたき対策
+$_POST = checkInput( $_POST );
+//固定トークンを確認（CSRF対策）
+if ( isset( $_POST[ 'ticket' ], $_SESSION[ 'ticket' ] ) ) {
+  $ticket = $_POST[ 'ticket' ];
+  if ( $ticket !== $_SESSION[ 'ticket' ] ) {
+    //トークンが一致しない場合は処理を中止
+    die( 'Access Denied!' );
+  }
+} else {
+  //トークンが存在しない場合は処理を中止（直接このページにアクセスするとエラーになる）
+  $_SERVER['HTTP_HOST'];
+  dirname($_SERVER['PHP_SELF']);
+  header('Location: /contact_form/contact/confirm.php');
+  exit();
+}
+
 //メールアドレス等を記述したファイルの読み込み
 require '../libs/mailvars.php'; 
  

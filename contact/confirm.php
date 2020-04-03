@@ -1,9 +1,11 @@
 <?php
 //セッションを開始
 session_start();
+
 //エスケープ処理やデータチェックを行う関数のファイルの読み込み
 require '../libs/functions.php';
-//POSTされたデータをチェック
+
+//POSTされたデータをチェック　URLの直たたき対策
 $_POST = checkInput( $_POST );
 //固定トークンを確認（CSRF対策）
 if ( isset( $_POST[ 'ticket' ], $_SESSION[ 'ticket' ] ) ) {
@@ -14,8 +16,12 @@ if ( isset( $_POST[ 'ticket' ], $_SESSION[ 'ticket' ] ) ) {
   }
 } else {
   //トークンが存在しない場合は処理を中止（直接このページにアクセスするとエラーになる）
-  die( 'Access Denied（直接このページにはアクセスできません）' );
+  $_SERVER['HTTP_HOST'];
+  dirname($_SERVER['PHP_SELF']);
+  header('Location: /contact_form/contact/contact.php');
+  exit();
 }
+
 //POSTされたデータを変数に格納
 $name = isset( $_POST[ 'name' ] ) ? $_POST[ 'name' ] : NULL;
 $email = isset( $_POST[ 'email' ] ) ? $_POST[ 'email' ] : NULL;
@@ -87,7 +93,7 @@ if ( count( $error ) > 0 ) {
   $dirname = $dirname == DIRECTORY_SEPARATOR ? '' : $dirname;
   $url = ( empty( $_SERVER[ 'HTTPS' ] ) ? 'http://' : 'https://' ) . $_SERVER[ 'SERVER_NAME' ] . $dirname . '/contact.php';
   header( 'HTTP/1.1 303 See Other' );
-  header( 'location: https://3619dda849484d518eb5fda739e3e87d.vfs.cloud9.ap-northeast-1.amazonaws.com/contact/contact.php');
+  header( "location: {$url}");
   exit;
 }
 ?>
