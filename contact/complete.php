@@ -44,7 +44,7 @@ if ( isset( $_POST[ 'ticket' ], $_SESSION[ 'ticket' ] ) ) {
   $url = ( empty( $_SERVER[ 'HTTPS' ] ) ? 'http://' : 'https://' ) . $_SERVER[ 'SERVER_NAME' ] . $dirname . '/contact.php';
   header( 'HTTP/1.1 303 See Other' );
   header( 'location: ' . $url );
-  exit; //忘れないように
+  exit; 
 }
  
 //変数にエスケープ処理したセッション変数の値を代入
@@ -95,6 +95,7 @@ if ( $result ) {
   //送信失敗時（もしあれば）
 }
 ?>
+
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -106,37 +107,46 @@ if ( $result ) {
 <link href="../style.css" rel="stylesheet">
 </head>
 <body>
+
 <div class="container">
   <h2>お問い合わせフォーム</h2>
   <?php if ( $result ): ?>
   <h3>送信完了!</h3>
   <p>お問い合わせいただきありがとうございます。</p>
   <p>送信完了いたしました。</p>
+
     <div class="table-responsive confirm_table">
     <table class="table table-bordered">
       <caption>送信内容</caption>
+
       <tr>
         <th>お名前</th>
         <td><?php var_dump($name); ?></td>
       </tr>
+
       <tr>
         <th>Email</th>
         <td><?php var_dump($email); ?></td>
       </tr>
+
       <tr>
         <th>お電話番号</th>
         <td><?php var_dump($tel); ?></td>
       </tr>
+
       <tr>
         <th>件名</th>
         <td><?php var_dump($subject); ?></td>
       </tr>
+
       <tr>
         <th>お問い合わせ内容</th>
         <td><?php var_dump(h($body)); ?></td>
       </tr>
+
     </table>
   </div>
+
   <?php else: ?>
   <p>申し訳ございませんが、送信に失敗しました。</p>
   <p>しばらくしてもう一度お試しになるか、メールにてご連絡ください。</p>
