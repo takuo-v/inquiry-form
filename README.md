@@ -2,13 +2,13 @@
 「問い合わせフォーム」
 
 【簡単な説明】
-・PHP＋JQueryで作成した問い合わせフォームです。 
+・PHPで作成した問い合わせフォームです。 
 
 【機能】
 ・問い合わせフォーム　
 
 【使用した技術】
-・PHP 5.6.40 ・Bootstrap(デザイン) ・JQuery（入力値の検証）
+・PHP 5.6.40 ・Bootstrap(デザイン) 
 
 【画面構成】
 　contact.php（入力画面） ⇛　confirm.php（確認画面） ⇛ complete.php（完了画面）
