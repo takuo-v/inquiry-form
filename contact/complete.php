@@ -48,7 +48,10 @@ if ( isset( $_POST[ 'ticket' ], $_SESSION[ 'ticket' ] ) ) {
 }
  
 //変数にエスケープ処理したセッション変数の値を代入
-$name = h( $_SESSION[ 'name' ] );
+$name1 = h( $_SESSION[ 'name1' ] );
+$name2 = h( $_SESSION[ 'name2' ] );
+$name3 = h( $_SESSION[ 'name3' ] );
+$name4 = h( $_SESSION[ 'name4' ] );
 $email = h( $_SESSION[ 'email' ] ) ;
 $tel =  h( $_SESSION[ 'tel' ] ) ;
 $subject = h( $_SESSION[ 'subject' ] );
@@ -57,7 +60,8 @@ $body = h( $_SESSION[ 'body' ] );
 //メール本文の組み立て
 $mail_body = 'コンタクトページからのお問い合わせ' . "\n\n";
 $mail_body .=  date("Y年m月d日 H時i分") . "\n\n"; 
-$mail_body .=  "お名前： " .$name . "\n";
+$mail_body .=  "お名前/性： " .$name1 . "\n";
+$mail_body .=  "お名前/名： " .$name3 . "\n";
 $mail_body .=  "Email： " . $email . "\n"  ;
 $mail_body .=  "お電話番号： " . $tel . "\n\n" ;
 $mail_body .=  "＜お問い合わせ内容＞" . "\n" . $body;
@@ -120,8 +124,21 @@ if ( $result ) {
       <caption>送信内容</caption>
 
       <tr>
-        <th>お名前</th>
-        <td><?php var_dump($name); ?></td>
+        <th>お名前/性</th>
+        <td><?php var_dump($name1); ?></td>
+      </tr>
+      
+      <tr>
+        <th>お名前/セイ</th>
+        <td><?php var_dump($name2); ?></td>
+      </tr>      
+      
+      <th>お名前/名</th>
+        <td><?php var_dump($name3); ?></td>
+      </tr>      
+
+      <th>お名前/メイ</th>
+        <td><?php var_dump($name4); ?></td>
       </tr>
 
       <tr>

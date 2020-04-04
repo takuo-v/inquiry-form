@@ -10,7 +10,10 @@ session_regenerate_id( TRUE );
 require '../libs/functions.php';
 
 //初回以外ですでにセッション変数に値が代入されていれば、その値を。そうでなければNULLで初期化
-$name = isset( $_SESSION[ 'name' ] ) ? $_SESSION[ 'name' ] : NULL;
+$name1 = isset( $_SESSION[ 'name1' ] ) ? $_SESSION[ 'name1' ] : NULL;
+$name2 = isset( $_SESSION[ 'name2' ] ) ? $_SESSION[ 'name2' ] : NULL;
+$name3 = isset( $_SESSION[ 'name3' ] ) ? $_SESSION[ 'name3' ] : NULL;
+$name4 = isset( $_SESSION[ 'name4' ] ) ? $_SESSION[ 'name4' ] : NULL;
 $email = isset( $_SESSION[ 'email' ] ) ? $_SESSION[ 'email' ] : NULL;
 $email_check = isset( $_SESSION[ 'email_check' ] ) ? $_SESSION[ 'email_check' ] : NULL;
 $tel = isset( $_SESSION[ 'tel' ] ) ? $_SESSION[ 'tel' ] : NULL;
@@ -19,7 +22,10 @@ $body = isset( $_SESSION[ 'body' ] ) ? $_SESSION[ 'body' ] : NULL;
 $error = isset( $_SESSION[ 'error' ] ) ? $_SESSION[ 'error' ] : NULL;
 
 //個々のエラーを初期化
-$error_name = isset( $error['name'] ) ? $error['name'] : NULL;
+$error_name1 = isset( $error['name1'] ) ? $error['name1'] : NULL;
+$error_name2 = isset( $error['name2'] ) ? $error['name2'] : NULL;
+$error_name3 = isset( $error['name3'] ) ? $error['name3'] : NULL;
+$error_name4 = isset( $error['name4'] ) ? $error['name4'] : NULL;
 $error_email = isset( $error['email'] ) ? $error['email'] : NULL;
 $error_email_check = isset( $error['email_check'] ) ? $error['email_check'] : NULL;
 $error_tel = isset( $error['tel'] ) ? $error['tel'] : NULL;
@@ -56,11 +62,33 @@ $ticket = $_SESSION[ 'ticket' ];
   <form id="main_contact" method="post" action="confirm.php">
 
     <div class="form-group">
-      <label for="name">お名前（必須） 
-        <span class="error"><?php echo h( $error_name ); ?></span>
+      <label for="name1">お名前/ 性（必須） 
+        <span class="error"><?php echo h( $error_name1 ); ?></span>
       </label>
-      <input type="text" class="form-control validate max50 required" id="name" name="name" placeholder="氏名" value="<?php echo h($name); ?>">
+      <input type="text" class="form-control validate max50 required" id="name" name="name1" placeholder="性" value="<?php echo h($name1); ?>">
     </div>
+
+    <div class="form-group">
+      <label for="name2">お名前/ セイ（必須） 
+        <span class="error"><?php echo h( $error_name2 ); ?></span>
+      </label>
+      <input type="text" class="form-control validate max50 required" id="name" name="name2" placeholder="セイ" value="<?php echo h($name2); ?>">
+    </div>    
+
+    <div class="form-group">
+      <label for="name3">お名前/ 名（必須） 
+        <span class="error"><?php echo h( $error_name3 ); ?></span>
+      </label>
+      <input type="text" class="form-control validate max50 required" id="name" name="name3" placeholder="名" value="<?php echo h($name3); ?>">
+    </div>
+
+    <div class="form-group">
+      <label for="name4">お名前/ メイ（必須） 
+        <span class="error"><?php echo h( $error_name4 ); ?></span>
+      </label>
+      <input type="text" class="form-control validate max50 required" id="name" name="name4" placeholder="メイ" value="<?php echo h($name4); ?>">
+    </div>    
+
 
     <div class="form-group">
       <label for="email">Email（必須） 
@@ -77,7 +105,7 @@ $ticket = $_SESSION[ 'ticket' ];
     </div>
 
     <div class="form-group">
-      <label for="tel">お電話番号（半角英数字） 
+      <label for="tel">お電話番号（半角英数字 必須） 
         <span class="error"><?php echo h( $error_tel_empty ); ?></span>
         <span class="error"><?php echo h( $error_tel ); ?></span>
         <span class="error"><?php echo h( $error_tel_format ); ?></span>
@@ -141,7 +169,7 @@ jQuery(function($){
     //電話番号の検証
     var tel = $.trim($("#tel").val());
     if(tel && !(/^\(?\d{2,5}\)?[-(\.\s]{0,2}\d{1,4}[-)\.\s]{0,2}\d{3,4}$/gi).test(tel)){
-      $("#tel").after("<p class='error'>電話番号の形式が異なります（半角英数字でご入力ください）</p>");
+      $("#tel").after("<p class='error'>電話番号の形式が異なります（半角英数字ハイフン抜きでご入力ください）</p>");
     }
     
     //1行テキスト入力フォームとテキストエリアの検証
