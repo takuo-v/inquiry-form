@@ -124,7 +124,7 @@ $ticket = $_SESSION[ 'ticket' ];
       <label for="body">お問い合わせ内容 
         <span class="error"><?php echo h( $error_body ); ?></span>
       </label>
-      <span id="count"> </span>/1000
+      <span id="count"> </span>
       <textarea class="form-control validate max1000 " id="body" name="body" placeholder="お問い合わせ内容（1000文字まで）をお書きください" rows="3"><?php echo h($body); ?></textarea>
     </div>
 
